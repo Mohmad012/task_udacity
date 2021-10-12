@@ -49,7 +49,17 @@ let imageBackEl = window.document.querySelectorAll('.random-background span');
 let landingPage = window.document.querySelector('.landing-page');
 
 // Data Of Background Images
-let	imageArray  = ["landing1.jpeg" , "landing2.jpg", "landing3.jpg" , "landing4.jpg" , "landing5.jpg"];
+let	imageArray  = [
+					"landing1.jpeg",
+					"landing2.jpg",
+					"landing3.jpg",
+					"landing4.jpg",
+					"landing5.jpg",
+					"landing6.jpg",
+					"landing7.png",
+					"landing9.jpeg",
+					"landing10.jpg"
+				];
 /* End Slider Box */
 
 /* Start Skills Box */
@@ -60,10 +70,6 @@ let ourSkills = window.document.querySelector('.skills');
 /* End Skills Box */
 
 /* Start Links Area */
-
-// Select All Links
-const allLinks = window.document.querySelectorAll('.header-area .links a');
-
 
 // Toggle Menu
 let toggleButton = window.document.querySelector('.toggle-menu'),
@@ -126,7 +132,7 @@ const randomizeimg = () => {
 			// Get Random Image
 			let	randomImages = Math.floor(Math.random() * imageArray.length);
 
-				landingPage.style.transition = '1s';
+				landingPage.style.transition = 'all 2s';
 
 				landingPage.style.backgroundSize = 'cover';
 
@@ -185,7 +191,7 @@ const removeAddActive = (event) => {
  * 
 */
 
-// Loop On All Links Navegation
+// Loop on data of links and Build dynamic navigation
 LinksData.forEach(e => {
 	
 	// Create Li Element
