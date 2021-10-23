@@ -142,9 +142,9 @@ const randomizeimg = () => {
 			},3000);
 
 		}
-
-
 }
+
+randomizeimg();
 
 // randomizeimg();
 
@@ -205,6 +205,9 @@ LinksData.forEach(e => {
 
 	// Set data-section Attribute = e.Section For anchor Element
 	ALink.setAttribute("data-section" , e.Section)
+
+	// Set data-section Attribute = e.Section For anchor Element
+	ALink.setAttribute("data-content" , e.Text)
 
 	// Create Text Node for Links
 	let NameLink = document.createTextNode(e.Text)
@@ -347,15 +350,6 @@ ScrollTopBtn.onclick = () => {
 		behavior: "smooth"
 	});
 
-	// Loop On All Of anchor tags
-	window.document.querySelectorAll('.header-area .links a').forEach(e => {
-		
-		e.classList.remove('active'); // Remove Active Class From Not Self Event
-	})
-
-	// Add Active Class For Self Event
-	window.document.querySelectorAll('.header-area .links a')[0].classList.add('active')
-
 }
 
 // Show button when page is scorlled upto given distance
@@ -378,10 +372,11 @@ window.addEventListener("scroll", toggleVisibility);
  * 
 */
 
+// add active class on first anchor link after loading of page
+window.onload = function(){
 
-// Add active class in first link
-if (window.pageYOffset >= 0) {
-	window.document.querySelectorAll('.header-area .links a')[0].setAttribute("class" , "active")
+	window.document.querySelectorAll('.header-area .links a')[0].classList.add('active')
+
 }
 
 // Check If Is Found Color in Local Storage Or Not 
@@ -426,7 +421,6 @@ if (storeColor !== '') {
 
 }
 
-// randomizeimg();
 
 // Loop On All Spans
 imageBackEl.forEach(span => {
@@ -455,8 +449,48 @@ imageBackEl.forEach(span => {
 
 	});
 
-
 });
+
+// Sence reall element and add it active class and remove from other
+window.onscroll = () => {
+
+	LinksData.forEach((e) => {
+
+		let targetSection = document.querySelector(e.Section);
+
+			// target Offset Top
+		let targetOffsetTop = targetSection.offsetTop,
+
+			// target Outer Height
+			targetOuterHeight = targetSection.offsetHeight,
+
+			// Window Height
+			windowHeight = this.innerHeight,
+
+			// Window ScrollTop
+			windowScrollTop = this.pageYOffset;
+
+
+		if (windowScrollTop > targetOffsetTop - 100) {
+
+			// Loop In All Of anchor Elements
+			window.document.querySelectorAll('.header-area .links a').forEach(aTarget => {
+
+
+				if (aTarget.getAttribute("data-section") === e.Section) {
+					aTarget.classList.add('active');
+
+				}else{
+					aTarget.classList.remove('active');
+				}
+
+			})
+
+		}
+
+	})
+
+};
 
 // Check If Is Found background Image in Local Storage Or Not 
 if (backgroundImageStore !== null && backgroundImageStore === "true") {
@@ -471,8 +505,5 @@ if (backgroundImageStore !== null && backgroundImageStore === "true") {
 
 		window.document.querySelector('.random-background .no').classList.add('active');
 }
-
-
-randomizeimg();
 
 goToSection(window.document.querySelectorAll('.header-area .links a'));
